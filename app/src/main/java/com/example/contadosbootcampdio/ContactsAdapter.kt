@@ -7,7 +7,7 @@ import android.widget.TextView
 import androidx.appcompat.view.menu.ActionMenuItemView
 import androidx.recyclerview.widget.RecyclerView
 
-class ContactsAdapter(val contactsList: ArrayList<Contact>):RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
+class ContactsAdapter(val contactList: ArrayList<Contact>):RecyclerView.Adapter<ContactsAdapter.ViewHolder>() {
 
     // os overrride criado automatico pelo IDE
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ContactsAdapter.ViewHolder {
@@ -18,11 +18,11 @@ class ContactsAdapter(val contactsList: ArrayList<Contact>):RecyclerView.Adapter
 
 
     override fun onBindViewHolder(holder: ContactsAdapter.ViewHolder, position: Int) {
-        holder.bindItem(contactsList[position])
+        holder.bindItem(contactList[position])
     }
 
     override fun getItemCount(): Int {
-        return contactsList.size
+        return contactList.size
     }
 
     // necessario criar para receber os dados e colocar nos itens

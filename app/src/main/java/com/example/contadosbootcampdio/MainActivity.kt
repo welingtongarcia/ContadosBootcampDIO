@@ -5,12 +5,14 @@ import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.provider.ContactsContract
 import androidx.core.app.ActivityCompat
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import java.util.jar.Manifest
 
 class MainActivity : AppCompatActivity() {
     // necessario por causa do IF
     val REQUEST_CONTACT = 1
+    val LINEAR_LAYOUT_VERTICAL = 1
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,15 +45,17 @@ class MainActivity : AppCompatActivity() {
         if(cursor!=null){
             while(cursor.moveToNext()){
                 contactList.add(Contact(
-                    cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
-                    cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER)))
+                   cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.DISPLAY_NAME)),
+                   cursor.getString(cursor.getColumnIndex(ContactsContract.CommonDataKinds.Phone.NUMBER))
+                ))
             }
+            cursor.close()
         }
-        cursor.close()
+        val adapter= ContactsAdapter(contactList)
+        val contactRecycleView = findViewById<RecyclerView>(R.id.contacts_recycle_view)
+
+        contactRecycleView.layoutManager = LinearLayoutManager(this,LINEAR_LAYOUT_VERTICAL,false)
+        contactRecycleView.adapter = adapter
     }
 
-    val adapter= ContactsAdapter(contactList)
-    val contactRecycleView = findViewById<RecyclerView>(R.id.contacts_recycle_view)
-
-    contactRecycleView.lao
 }
